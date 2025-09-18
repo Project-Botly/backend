@@ -2,8 +2,11 @@ export interface BusinessConfig {
   id?: string
   name: string
   industry: string
-  description?: string
+  email: string
+  phoneNumber: string
   phoneNumberId: string
+  wabaId: string
+  description?: string
   businessHours?: string
   aiInstructions?: string
   autoReply?: boolean

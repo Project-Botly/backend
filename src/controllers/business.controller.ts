@@ -8,26 +8,35 @@ import {
   SendMessageRequest,
 } from '../types/business.types'
 import { logger } from '../utils/logger'
+import { SignupPayload } from '../types/auth.types'
+import { MetaService } from '../services/meta.service'
 
 export class BusinessController {
   private businessService: BusinessService
   private whatsappService: WhatsAppService
   private conversationService: ConversationService
+  private metaService: MetaService
 
   constructor() {
     this.businessService = new BusinessService()
     this.whatsappService = new WhatsAppService()
     this.conversationService = new ConversationService()
+    this.metaService = new MetaService()
   }
 
   configureBusiness = async (
-    req: Request<{}, {}, BusinessConfig>,
+    req: Request<{}, {}, SignupPayload>,
     res: Response
   ) => {
+    const { code } = req.body
     try {
-      logger.info('💼 Configuring new business')
+      logger.info('💼 Getting Meta credentials for business')
+      const cred = await this.metaService.getCredentials(code)
 
-      const businessConfig = await this.businessService.createBusiness(req.body)
+      const businessConfig = await this.businessService.createBusiness({
+        ...cred,
+        ...req.body,
+      })
 
       res.status(201).json({
         status: 'success',

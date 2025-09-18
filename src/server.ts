@@ -7,11 +7,12 @@ import { errorHandler } from './middlewares/error-handler'
 import { businessRoutes } from './routes/business'
 import { whatsappRoutes } from './routes/whatsapp'
 import { logger } from './utils/logger'
+import { authRoutes } from './routes/auth'
 
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4001
 
 // Rate limiting - more permissive for business bot
 const limiter = rateLimit({
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }))
 // Routes
 app.use('/api/whatsapp', whatsappRoutes)
 app.use('/api/business', businessRoutes)
+app.use('/api/auth', authRoutes)
 
 // Health check
 app.get('/health', (req, res) => {
