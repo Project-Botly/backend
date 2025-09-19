@@ -27,7 +27,7 @@ export class MetaService {
 
   async getCredentials(code: string): Promise<MetaCredentials> {
     const { data } = await axios.get(
-      `https://graph.facebook.com/v19.0/oauth/access_token`,
+      `https://graph.facebook.com/v23.0/oauth/access_token`,
       {
         params: {
           client_id: META_APP_ID,

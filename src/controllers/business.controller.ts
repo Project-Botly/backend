@@ -43,14 +43,12 @@ export class BusinessController {
         data: businessConfig,
         message: 'Business configured successfully',
       })
-    } catch (error) {
-      logger.error('❌ Error configuring business:', error)
+    } catch (err) {
+      logger.error('❌ Error configuring business:', err)
       res.status(500).json({
         status: 'error',
         message:
-          error instanceof Error
-            ? error.message
-            : 'Failed to configure business',
+          err instanceof Error ? err.message : 'Failed to configure business',
       })
     }
   }
