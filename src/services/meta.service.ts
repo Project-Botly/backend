@@ -32,7 +32,7 @@ export class MetaService {
         params: {
           client_id: META_APP_ID,
           client_secret: META_APP_SECRET,
-          redirect_uri: 'https://project-fenix-frontend.vercel.app',
+          redirect_uri: 'https://project-fenix-frontend.vercel.app/',
           code,
         },
       }
